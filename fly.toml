@@ -1,0 +1,19 @@
+app = "omelka-bot"
+primary_region = "fra"  # Выбери ближайший регион, например, "fra" (Frankfurt)
+
+[build]
+  builder = "paketobuildpacks/python"
+
+[env]
+  PORT = "8080"  # Fly.io требует порт, но для polling он не используется
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false  # Отключаем автоостановку
+  auto_start_machines = true
+  min_machines_running = 1  # Держим 1 машину активной для 24/7
+
+[[mounts]]
+  source = "data"
+  destination = "/app/data"
